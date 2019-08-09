@@ -22,10 +22,14 @@ async def on_server_leave(server):
 
 @bot.event
 async def on_message(message):
-    triggers = ("im", "i'm")
+    triggers = ["im", "i'm", 'i am']
     for trigger in triggers:
         if message.content.lower().startswith(trigger + ' '):
-            await message.channel.send("Hi {0}, I'm Dad".format(message.content[len(trigger):].strip()))
+            content = message.content[len(trigger):].strip()
+            if content.lower() == 'dad':
+                await message.channel.send("You're not dad, I'm Dad!")
+            else:
+                await message.channel.send("Hi {0}, I'm Dad".format(content))
             break
 
 
